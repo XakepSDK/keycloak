@@ -147,6 +147,7 @@ public class UserAdapter implements CachedUserModel {
 
     @Override
     public void setUsername(String username) {
+        username = username==null ? null : username.toLowerCase();
         setSingleAttribute(UserModel.USERNAME, username);
     }
 
