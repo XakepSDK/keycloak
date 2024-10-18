@@ -56,8 +56,8 @@ import org.keycloak.validate.validators.LengthValidator;
  * of {@link UserProfileProvider}.
  *
  * <p>One of the main aspects of this implementation is to allow normalizing attributes accordingly to the profile
- * configuration and current context. As such, it provides some common normalization to common profile attributes (e.g.: username,
- * email, first and last names, dynamic read-only attributes).
+ * configuration and current context. As such, it provides some common normalization to common profile attributes (e.g.: email,
+ * first and last names, dynamic read-only attributes).
  *
  * <p>This implementation is not specific to any user profile implementation.
  *
@@ -454,8 +454,7 @@ public class DefaultAttributes extends HashMap<String, List<String>> implements 
 
         Stream<String> valuesStream = Optional.ofNullable(values).orElse(EMPTY_VALUE).stream().filter(Objects::nonNull);
 
-        // do not normalize the username if a federated user because we need to respect the format from the external identity store
-        if ((UserModel.USERNAME.equals(name) && !isFederated()) || UserModel.EMAIL.equals(name)) {
+        if (UserModel.EMAIL.equals(name)) {
             valuesStream = valuesStream.map(KeycloakModelUtils::toLowerCaseSafe);
         }
 
